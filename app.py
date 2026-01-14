@@ -46,6 +46,35 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
+# --- NEW: AUTHENTICATION FUNCTION ---
+def check_password():
+    """Returns True if the user had the correct password."""
+
+    def password_entered():
+        """Checks whether a password entered by the user is correct."""
+        if st.session_state["password"] == "liv_kpi_2026": # CHANGE THIS PASSWORD
+            st.session_state["password_correct"] = True
+            del st.session_state["password"]  # don't store password
+        else:
+            st.session_state["password_correct"] = False
+
+    if "password_correct" not in st.session_state:
+        # First run, show input for password.
+        st.text_input(
+            "Please enter the Dashboard Password", type="password", on_change=password_entered, key="password"
+        )
+        return False
+    elif not st.session_state["password_correct"]:
+        # Password incorrect, show input + error.
+        st.text_input(
+            "Please enter the Dashboard Password", type="password", on_change=password_entered, key="password"
+        )
+        st.error("😕 Password incorrect")
+        return False
+    else:
+        # Password correct.
+        return True
+
 # --- 2. DATA PROCESSING ENGINE ---
 @st.cache_data(ttl=600)
 def load_and_transform_data(file_path):
@@ -88,82 +117,83 @@ def load_and_transform_data(file_path):
 
 # --- 3. UI LAYOUT ---
 def main():
-    st.sidebar.title("📖 Book of KPIs")
-    
-    df = load_and_transform_data('data/input/app_kpi.csv')
-
-    if df.empty:
-        st.error("Data could not be loaded. Please check app_kpi.csv.")
-        return
-
-    # Sidebar: Filter out blanks to fix top of list
-    all_kpis = sorted([k for k in df['KPI'].dropna().unique() if str(k).strip() != ""])
-    search = st.sidebar.text_input("🔍 Search KPI", "")
-    filtered_kpis = [k for k in all_kpis if search.lower() in k.lower()]
-    
-    selected_kpi = st.sidebar.radio("Select KPI:", filtered_kpis, label_visibility="collapsed")
-
-    if selected_kpi:
-        kpi_data = df[df['KPI'] == selected_kpi]
-        unit = kpi_data['Unit'].iloc[0] if 'Unit' in kpi_data.columns else ""
-        target = kpi_data['Target'].iloc[0] if 'Target' in kpi_data.columns else "N/A"
-        source = kpi_data['Source'].iloc[0] if not kpi_data['Source'].empty else "N/A"
+    if check_password():
+        st.sidebar.title("📖 Book of KPIs")
         
-        # Header Row
-        c1, c2, c3 = st.columns(3)
-        with c1:
-            st.markdown(f'<div class="metric-container"><div class="metric-label">KPI Name</div><div class="metric-value">{selected_kpi}</div></div>', unsafe_allow_html=True)
-        with c2:
-            st.markdown(f'<div class="metric-container"><div class="metric-label">Target</div><div class="metric-value">{target} {unit}</div></div>', unsafe_allow_html=True)
-        with c3:
-            st.markdown(f'<div class="metric-container"><div class="metric-label">Data Source</div><div class="metric-value">{source}</div></div>', unsafe_allow_html=True)
+        df = load_and_transform_data('data/input/app_kpi.csv')
 
-        st.markdown("---")
+        if df.empty:
+            st.error("Data could not be loaded. Please check app_kpi.csv.")
+            return
 
-        # Line Chart
-        fig = px.line(
-            kpi_data,
-            x='month',
-            y='kpi_value',
-            color='Platform',
-            markers=True,
-            title=f"Platform-wise Trend: {selected_kpi} ({unit})",
-            template="plotly_dark",
-            labels={'kpi_value': f'Value ({unit})', 'month': ''} # Remove 'Month' label
-        )
+        # Sidebar: Filter out blanks to fix top of list
+        all_kpis = sorted([k for k in df['KPI'].dropna().unique() if str(k).strip() != ""])
+        search = st.sidebar.text_input("🔍 Search KPI", "")
+        filtered_kpis = [k for k in all_kpis if search.lower() in k.lower()]
+        
+        selected_kpi = st.sidebar.radio("Select KPI:", filtered_kpis, label_visibility="collapsed")
 
-        # FIX A: Hover Formatting
-        fig.update_layout(
-            hovermode="x unified",
-            xaxis=dict(
-                hoverformat="%b, %Y", # Shows 'Dec, 2025' in unified header
-                tickformat="%b, %Y",
-                title="" # Remove axis title for cleaner look
+        if selected_kpi:
+            kpi_data = df[df['KPI'] == selected_kpi]
+            unit = kpi_data['Unit'].iloc[0] if 'Unit' in kpi_data.columns else ""
+            target = kpi_data['Target'].iloc[0] if 'Target' in kpi_data.columns else "N/A"
+            source = kpi_data['Source'].iloc[0] if not kpi_data['Source'].empty else "N/A"
+            
+            # Header Row
+            c1, c2, c3 = st.columns(3)
+            with c1:
+                st.markdown(f'<div class="metric-container"><div class="metric-label">KPI Name</div><div class="metric-value">{selected_kpi}</div></div>', unsafe_allow_html=True)
+            with c2:
+                st.markdown(f'<div class="metric-container"><div class="metric-label">Target</div><div class="metric-value">{target} {unit}</div></div>', unsafe_allow_html=True)
+            with c3:
+                st.markdown(f'<div class="metric-container"><div class="metric-label">Data Source</div><div class="metric-value">{source}</div></div>', unsafe_allow_html=True)
+
+            st.markdown("---")
+
+            # Line Chart
+            fig = px.line(
+                kpi_data,
+                x='month',
+                y='kpi_value',
+                color='Platform',
+                markers=True,
+                title=f"Platform-wise Trend: {selected_kpi} ({unit})",
+                template="plotly_dark",
+                labels={'kpi_value': f'Value ({unit})', 'month': ''} # Remove 'Month' label
             )
-        )
-        
-        # Remove redundant 'Month' field from individual lines
-        fig.update_traces(
-            hovertemplate="<b>%{fullData.name}</b>: %{y}<extra></extra>"
-        )
 
-        # FIX B: Y-Axis Scaling for Crash Free Rate
-        if "Crash Free Rate" in selected_kpi:
-            # "scale between 90 - 100 with gap of 1 for crashes"
-            fig.update_yaxes(range=[90, 100], dtick=1)
-        else:
-            fig.update_yaxes(autorange=True)
+            # FIX A: Hover Formatting
+            fig.update_layout(
+                hovermode="x unified",
+                xaxis=dict(
+                    hoverformat="%b, %Y", # Shows 'Dec, 2025' in unified header
+                    tickformat="%b, %Y",
+                    title="" # Remove axis title for cleaner look
+                )
+            )
+            
+            # Remove redundant 'Month' field from individual lines
+            fig.update_traces(
+                hovertemplate="<b>%{fullData.name}</b>: %{y}<extra></extra>"
+            )
 
-        fig.update_layout(
-            legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
-        )
+            # FIX B: Y-Axis Scaling for Crash Free Rate
+            if "Crash Free Rate" in selected_kpi:
+                # "scale between 90 - 100 with gap of 1 for crashes"
+                fig.update_yaxes(range=[90, 100], dtick=1)
+            else:
+                fig.update_yaxes(autorange=True)
 
-        st.plotly_chart(fig, use_container_width=True)
+            fig.update_layout(
+                legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
+            )
 
-        # View Data Table - Expanded by default
-        with st.expander("📊 View Data Table", expanded=True):
-            pivot_view = kpi_data.pivot(index='Platform', columns='month_str', values='kpi_value')
-            st.dataframe(pivot_view, use_container_width=True)
+            st.plotly_chart(fig, use_container_width=True)
+
+            # View Data Table - Expanded by default
+            with st.expander("📊 View Data Table", expanded=True):
+                pivot_view = kpi_data.pivot(index='Platform', columns='month_str', values='kpi_value')
+                st.dataframe(pivot_view, use_container_width=True)
 
 if __name__ == "__main__":
     main()
