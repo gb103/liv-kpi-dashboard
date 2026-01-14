@@ -192,7 +192,16 @@ def main():
 
             # View Data Table - Expanded by default
             with st.expander("📊 View Data Table", expanded=True):
+                # 1. Get the list of months in the correct chronological order from our sorted data
+                chronological_months = kpi_data['month_str'].unique()
+                
+                # 2. Pivot the data
                 pivot_view = kpi_data.pivot(index='Platform', columns='month_str', values='kpi_value')
+                
+                # 3. Reorder the columns based on our chronological list
+                pivot_view = pivot_view[chronological_months]
+                
+                # Display the table
                 st.dataframe(pivot_view, use_container_width=True)
 
 if __name__ == "__main__":
