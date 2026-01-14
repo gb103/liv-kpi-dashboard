@@ -16,10 +16,10 @@ Hang rate,ms/sec,iOS,15 ms / hr,Rahul,App store,15.8,12.3,18.9,10.2,15.2,15.5,14
 launch time,ms,iOS,2000 ms,Rahul,App store,2692,2555,2921,2783,2455,2414,2685,2499,2971,2271,2338,2167,2167,
 App size,MB,Android,<30 MB,Trushal,Play store,35.7,35.7,35.7,35.7,36,36,38.8,38.8,44.1,46.4,46.4,46.4,46.4,
 App size,MB,Android TV,<30 MB,Ashok,Play store,35.7,35.7,35.7,35.7,36,36,36,38.8,44.1,46.4,44.8,46.4,46.4,
-App size (Install Size),MB,Apple TV,<200 MB,Senthil,App store,329,329,248.5,248.5,248.5,234.9,234.9,258.5,259.2,259.2,258.8,258.8,258.8,
+App size,MB,Apple TV,<200 MB,Senthil,App store,329,329,248.5,248.5,248.5,234.9,234.9,258.5,259.2,259.2,258.8,258.8,258.8,
 App open to landing screen (session_start),%,Android,,Trushal,Looker,,88.1,86.86,86.25,84.73,84.18,85.72,86.56,87.27,88.89,80,83.54,83.15,Internet /offline event issues Fixed in Sp122
 App open to landing screen (session_start),%,Android TV,,Ashok,Looker,,85.5,85.42,87.3,87.33,86.54,87.28,88.63,87.12,91.15,88.04,88.36,88.26,
-App size (Install Size),MB,iOS,<200 MB,Rahul,App store,357,329,227.7,227,227,227,214,259,259,259,258.2,258.2,258.2,
+App size,MB,iOS,<200 MB,Rahul,App store,357,329,227.7,227,227,227,214,259,259,259,258.2,258.2,258.2,
 App open to landing screen (session_start),%,iOS,,Rahul,Looker,,94.5,94.22,94.05,92.97,92.72,92.94,93.1,95.02,96.39,94.62,95.54,95.44,
 App open to landing screen (session_start),%,Apple TV,,Senthil,Looker,,98.69,98.79,98.67,98.43,97.83,97.99,97.9,97.79,98.76,97.99,97.9,98.09,
 App open to landing screen (app_launch),%,Android,98%,Trushal,Looker,,94,93.4,93.12,92.08,91.32,"91.97
