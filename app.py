@@ -11,16 +11,14 @@ st.markdown("""
     .main { background-color: #0e1117; }
     [data-testid="stSidebar"] { background-color: #161b22; }
     
-    /* Sidebar text color for contrast */
+    /* Sidebar text color */
     [data-testid="stSidebar"] .stText, 
-    [data-testid="stSidebar"] label, 
-    [data-testid="stSidebar"] p,
-    [data-testid="stSidebar"] .st-ae,
-    [data-testid="stSidebar"] .stMarkdown { 
+    [data-testid="stSidebar"] label, [data-testid="stSidebar"] p,
+    [data-testid="stSidebar"] .st-ae, [data-testid="stSidebar"] .stMarkdown { 
         color: white !important; 
     }
 
-    /* Header Metrics: Black text on white background cards */
+    /* Header Metrics Card Styling */
     .metric-container {
         background-color: #ffffff;
         padding: 15px;
@@ -29,20 +27,12 @@ st.markdown("""
         min-height: 100px;
         margin-bottom: 10px;
     }
-    .metric-label {
-        font-size: 13px;
-        color: #4b5563;
-        margin-bottom: 5px;
-        font-weight: 600;
-        text-transform: uppercase;
-    }
-    .metric-value {
-        font-size: 19px;
-        font-weight: 800;
-        color: #000000;
-        line-height: 1.2;
-        word-wrap: break-word;
-    }
+    .metric-label { font-size: 12px; color: #4b5563; font-weight: 600; text-transform: uppercase; }
+    .metric-value { font-size: 18px; font-weight: 800; color: #000000; line-height: 1.2; }
+    
+    /* Status Headers */
+    .critical-header { color: #ff4b4b; font-size: 24px; font-weight: bold; margin-top: 20px; }
+    .improve-header { color: #facc15; font-size: 24px; font-weight: bold; margin-top: 20px; }
     </style>
     """, unsafe_allow_html=True)
 
@@ -54,116 +44,138 @@ def check_password():
             del st.session_state["password"]
         else:
             st.session_state["password_correct"] = False
-
     if "password_correct" not in st.session_state:
         st.text_input("Enter Dashboard Password", type="password", on_change=password_entered, key="password")
         return False
-    elif not st.session_state["password_correct"]:
-        st.text_input("Enter Dashboard Password", type="password", on_change=password_entered, key="password")
-        st.error("😕 Password incorrect")
-        return False
-    else:
-        return True
+    return st.session_state["password_correct"]
 
 # --- DATA PROCESSING ENGINE ---
 @st.cache_data(ttl=600)
 def load_and_transform_data(file_path):
     try:
         raw_df = pd.read_csv(file_path, keep_default_na=False)
-        
-        # Identify month columns
         month_keywords = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
         month_cols = [col for col in raw_df.columns if any(m in col for m in month_keywords)]
         
-        id_vars = ['KPI', 'Unit', 'Platform', 'Target', 'Source']
-        df_long = pd.melt(raw_df, id_vars=id_vars, value_vars=month_cols, 
-                          var_name='month_str', value_name='raw_val')
+        id_vars = ['KPI', 'Unit', 'Platform', 'Target', 'Threshold', 'Source']
+        df_long = pd.melt(raw_df, id_vars=id_vars, value_vars=month_cols, var_name='month_str', value_name='raw_val')
         
         def process_value(val):
             val_str = str(val).strip()
             if val_str.upper() == "NA": return None
             if val_str in ["", "-", " "]: return "FILL_MEDIAN"
-            try:
-                return float(val_str.replace('%', '').replace(',', '').strip())
-            except ValueError:
-                return None
+            try: return float(val_str.replace('%', '').replace(',', '').strip())
+            except ValueError: return None
 
-        df_long['temp_val'] = df_long['raw_val'].apply(process_value)
-        df_long['kpi_value'] = pd.to_numeric(df_long['temp_val'], errors='coerce')
+        df_long['kpi_value'] = df_long['raw_val'].apply(process_value)
         
-        # Median Imputation for missing values
-        medians = df_long.groupby(['KPI', 'Platform'])['kpi_value'].transform('median')
-        df_long.loc[df_long['temp_val'] == "FILL_MEDIAN", 'kpi_value'] = medians
+        # Numeric conversion for logic
+        df_long['Target_num'] = pd.to_numeric(df_long['Target'].astype(str).str.replace('%',''), errors='coerce')
+        df_long['Threshold_num'] = pd.to_numeric(df_long['Threshold'].astype(str).str.replace('%',''), errors='coerce')
         
-        # Standardize date parsing
+        # Median Imputation
+        temp_numeric = pd.to_numeric(df_long['kpi_value'], errors='coerce')
+        medians = temp_numeric.groupby([df_long['KPI'], df_long['Platform']]).transform('median')
+        df_long['kpi_value'] = np.where(df_long['kpi_value'] == "FILL_MEDIAN", medians, df_long['kpi_value'])
+        df_long['kpi_value'] = pd.to_numeric(df_long['kpi_value'], errors='coerce')
         df_long['month'] = pd.to_datetime(df_long['month_str'], format='mixed', errors='coerce')
         
         return df_long.sort_values(by=['KPI', 'month'])
     except Exception as e:
-        st.error(f"Error loading data: {e}")
+        st.error(f"Error: {e}")
         return pd.DataFrame()
 
-# --- MAIN DASHBOARD ---
+# --- MAIN UI ---
 def main():
     if check_password():
-        st.sidebar.title("📖 Book of KPIs")
         df = load_and_transform_data('data/input/app_kpi.csv')
+        if df.empty: return
 
-        if df.empty:
-            st.error("Data could not be loaded. Please ensure app_kpi.csv is present.")
-            return
+        st.sidebar.title("📖 Book of KPIs")
+        menu_choice = st.sidebar.radio("Navigation", ["Summary", "KPI Explorer"])
 
-        # Sidebar navigation - filter out empty KPI rows
-        all_kpis = sorted([k for k in df['KPI'].dropna().unique() if str(k).strip() != ""])
-        search = st.sidebar.text_input("🔍 Search KPI", "")
-        filtered_kpis = [k for k in all_kpis if search.lower() in k.lower()]
-        selected_kpi = st.sidebar.radio("Select KPI:", filtered_kpis, label_visibility="collapsed")
-
-        if selected_kpi:
-            kpi_data = df[df['KPI'] == selected_kpi]
-            unit = kpi_data['Unit'].iloc[0] if 'Unit' in kpi_data.columns else ""
-            target = kpi_data['Target'].iloc[0] if 'Target' in kpi_data.columns else "N/A"
-            source = kpi_data['Source'].iloc[0] if not kpi_data['Source'].empty else "N/A"
+        if menu_choice == "Summary":
+            st.title("📊 Dashboard Health Summary")
             
-            # Header Row Metrics
-            c1, c2, c3 = st.columns(3)
-            with c1: st.markdown(f'<div class="metric-container"><div class="metric-label">KPI Name</div><div class="metric-value">{selected_kpi}</div></div>', unsafe_allow_html=True)
-            with c2: st.markdown(f'<div class="metric-container"><div class="metric-label">Target</div><div class="metric-value">{target} {unit}</div></div>', unsafe_allow_html=True)
-            with c3: st.markdown(f'<div class="metric-container"><div class="metric-label">Data Source</div><div class="metric-value">{source}</div></div>', unsafe_allow_html=True)
+            # Find latest month data for each KPI/Platform
+            latest_data = df.dropna(subset=['kpi_value']).sort_values('month').groupby(['KPI', 'Platform']).last().reset_index()
+            
+            critical_rows = []
+            improve_rows = []
 
-            st.markdown("---")
-
-            # LINE CHART
-            fig = px.line(
-                kpi_data, x='month', y='kpi_value', color='Platform', markers=True,
-                title=f"Platform-wise Trend: {selected_kpi} ({unit})",
-                template="plotly_dark", labels={'kpi_value': f'Value ({unit})', 'month': ''}
-            )
-
-            # Reverted to Older Code Logic: Generic Autorange for all metrics
-            fig.update_yaxes(autorange=True)
-
-            # Unified Hover Configuration
-            fig.update_layout(
-                hovermode="x unified",
-                xaxis=dict(hoverformat="%b, %Y", tickformat="%b, %Y", title="Timeline"),
-                legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
-            )
-            fig.update_traces(hovertemplate="<b>%{fullData.name}</b>: %{y}<extra></extra>")
-
-            st.plotly_chart(fig, use_container_width=True)
-
-            # DATA TABLE: Chronological Order
-            with st.expander("📊 View Data Table", expanded=True):
-                # Ensure columns follow the calendar by sorting against the actual 'month' datetime
-                order_helper = kpi_data[['month_str', 'month']].drop_duplicates().sort_values('month')
-                chronological_months = order_helper['month_str'].tolist()
+            for _, row in latest_data.iterrows():
+                val = row['kpi_value']
+                tgt = row['Target_num']
+                thr = row['Threshold_num']
+                unit = row['Unit']
                 
-                pivot_view = kpi_data.pivot(index='Platform', columns='month_str', values='kpi_value')
-                # Explicitly reindex to fix sorting issues
-                pivot_view = pivot_view.reindex(columns=chronological_months)
+                # Logic: Is it a 'Higher is Better' or 'Lower is Better' metric?
+                is_critical = False
+                is_improvement = False
                 
-                st.dataframe(pivot_view, use_container_width=True)
+                if tgt > thr: # Higher is better (e.g. 99% Crash Free)
+                    if val < thr: is_critical = True
+                    elif val < tgt: is_improvement = True
+                else: # Lower is better (e.g. 100 RAI)
+                    if val > thr: is_critical = True
+                    elif val > tgt: is_improvement = True
+
+                row_dict = {
+                    "KPI Name": row['KPI'],
+                    "Platform": row['Platform'],
+                    "Current Value": f"{val} {unit}",
+                    "Reference": "" 
+                }
+
+                if is_critical:
+                    row_dict["Threshold"] = f"{row['Threshold']} {unit}"
+                    critical_rows.append(row_dict)
+                elif is_improvement:
+                    row_dict["Target"] = f"{row['Target']} {unit}"
+                    improve_rows.append(row_dict)
+
+            # --- RENDER TABLES ---
+            st.markdown('<div class="critical-header">🚨 Critical Attention - Fix Required</div>', unsafe_allow_html=True)
+            if critical_rows:
+                st.table(pd.DataFrame(critical_rows)[["KPI Name", "Platform", "Current Value", "Threshold"]])
+            else:
+                st.success("No critical items found.")
+
+            st.markdown('<div class="improve-header">⚠️ Needs Improvement</div>', unsafe_allow_html=True)
+            if improve_rows:
+                st.table(pd.DataFrame(improve_rows)[["KPI Name", "Platform", "Current Value", "Target"]])
+            else:
+                st.success("All targets met!")
+
+        else: # KPI Explorer Mode
+            all_kpis = sorted([k for k in df['KPI'].dropna().unique() if str(k).strip() != ""])
+            search = st.sidebar.text_input("🔍 Search KPI", "")
+            filtered_kpis = [k for k in all_kpis if search.lower() in k.lower()]
+            selected_kpi = st.sidebar.radio("Select KPI:", filtered_kpis, label_visibility="collapsed")
+
+            if selected_kpi:
+                kpi_data = df[df['KPI'] == selected_kpi]
+                unit = kpi_data['Unit'].iloc[0]
+                
+                # Header with column D+B and E+B display
+                c1, c2, c3, c4 = st.columns(4)
+                with c1: st.markdown(f'<div class="metric-container"><div class="metric-label">KPI Name</div><div class="metric-value">{selected_kpi}</div></div>', unsafe_allow_html=True)
+                with c2: st.markdown(f'<div class="metric-container"><div class="metric-label">Target (D+B)</div><div class="metric-value">{kpi_data["Target"].iloc[0]} {unit}</div></div>', unsafe_allow_html=True)
+                with c3: st.markdown(f'<div class="metric-container"><div class="metric-label">Threshold (E+B)</div><div class="metric-value">{kpi_data["Threshold"].iloc[0]} {unit}</div></div>', unsafe_allow_html=True)
+                with c4: st.markdown(f'<div class="metric-container"><div class="metric-label">Data Source</div><div class="metric-value">{kpi_data["Source"].iloc[0]}</div></div>', unsafe_allow_html=True)
+
+                st.markdown("---")
+
+                fig = px.line(kpi_data, x='month', y='kpi_value', color='Platform', markers=True, 
+                              title=f"Trend: {selected_kpi} ({unit})", template="plotly_dark")
+                fig.update_layout(hovermode="x unified", xaxis=dict(hoverformat="%b, %Y", tickformat="%b, %Y", title=""))
+                fig.update_traces(hovertemplate="<b>%{fullData.name}</b>: %{y}<extra></extra>")
+                st.plotly_chart(fig, use_container_width=True)
+
+                with st.expander("📊 View Data Table", expanded=True):
+                    order_helper = kpi_data[['month_str', 'month']].drop_duplicates().sort_values('month')
+                    pivot_view = kpi_data.pivot(index='Platform', columns='month_str', values='kpi_value')
+                    st.dataframe(pivot_view.reindex(columns=order_helper['month_str'].tolist()), use_container_width=True)
 
 if __name__ == "__main__":
     main()
