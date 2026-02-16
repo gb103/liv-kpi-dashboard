@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import numpy as np
+import requests
+from io import BytesIO
 
 # --- 1. CONFIGURATION & STYLING ---
 st.set_page_config(page_title="Book of KPIs", layout="wide")
@@ -77,9 +79,40 @@ def check_password():
 
 # --- DATA PROCESSING ENGINE ---
 @st.cache_data(ttl=600)
-def load_and_transform_data(file_path):
+def load_and_transform_data(file_source):
     try:
-        raw_df = pd.read_csv(file_path, keep_default_na=False)
+        # If file_source is a SharePoint link, download it
+        if "sharepoint.com" in file_source:
+            # Convert SharePoint shared link to download format
+            # For shared links in format /:x:/p/..., convert to /download
+            if "/:x:/p/" in file_source or "/:x:/r/" in file_source:
+                # Add download=1 parameter to the URL
+                if "?" in file_source:
+                    download_url = file_source + "&download=1"
+                else:
+                    download_url = file_source + "?download=1"
+            else:
+                download_url = file_source
+            
+            try:
+                # Try to download the file
+                response = requests.get(download_url, timeout=30)
+                response.raise_for_status()
+                raw_df = pd.read_excel(BytesIO(response.content), keep_default_na=False)
+            except requests.exceptions.HTTPError as e:
+                if e.response.status_code == 403:
+                    st.error("❌ Access Denied: SharePoint file requires authentication.")
+                    st.info("💡 Solution: Ensure the shared link is set to 'Can edit' or 'Can view' for anyone with the link.")
+                    return pd.DataFrame()
+                else:
+                    raise
+        else:
+            # Read local file
+            if file_source.endswith('.xlsx'):
+                raw_df = pd.read_excel(file_source, keep_default_na=False)
+            else:
+                raw_df = pd.read_csv(file_source, keep_default_na=False)
+        
         month_keywords = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
         month_cols = [col for col in raw_df.columns if any(m in col for m in month_keywords)]
         
@@ -114,7 +147,10 @@ def load_and_transform_data(file_path):
 # --- MAIN UI ---
 def main():
     if check_password():
-        df = load_and_transform_data('data/input/app_kpi.csv')
+        # SharePoint Excel file URL (shared link)
+        sharepoint_url = "https://setindia-my.sharepoint.com/:x:/p/gaurav_bansal/IQAO63W_ae-6Ra1QiYfi8prwAdZ5qq1Ws9_L9Tf3XbUQ7UU?e=IY3iU7"
+        
+        df = load_and_transform_data(sharepoint_url)
         if df.empty: return
 
         st.sidebar.title("📖 Book of KPIs")
