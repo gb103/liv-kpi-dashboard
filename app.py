@@ -33,6 +33,16 @@ st.markdown("""
     /* Status Headers */
     .critical-header { color: #ff4b4b; font-size: 24px; font-weight: bold; margin-top: 20px; }
     .improve-header { color: #facc15; font-size: 24px; font-weight: bold; margin-top: 20px; }
+    
+    /* Table Row Hover Effect */
+    table tbody tr:hover {
+        background-color: #ffd700 !important;
+        color: #000000 !important;
+        transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    table tbody tr {
+        transition: background-color 0.2s ease, color 0.2s ease;
+    }
     </style>
     """, unsafe_allow_html=True)
 
@@ -92,7 +102,7 @@ def main():
         if df.empty: return
 
         st.sidebar.title("📖 Book of KPIs")
-        menu_choice = st.sidebar.radio("Navigation", ["Summary", "KPI Explorer"])
+        menu_choice = st.sidebar.radio("Navigation", ["Summary", "KPI Explorer", "KPI Trends"])
 
         if menu_choice == "Summary":
             st.title("📊 Dashboard Health Summary")
@@ -147,7 +157,7 @@ def main():
             else:
                 st.success("All targets met!")
 
-        else: # KPI Explorer Mode
+        elif menu_choice == "KPI Explorer":
             all_kpis = sorted([k for k in df['KPI'].dropna().unique() if str(k).strip() != ""])
             search = st.sidebar.text_input("🔍 Search KPI", "")
             filtered_kpis = [k for k in all_kpis if search.lower() in k.lower()]
@@ -176,6 +186,87 @@ def main():
                     order_helper = kpi_data[['month_str', 'month']].drop_duplicates().sort_values('month')
                     pivot_view = kpi_data.pivot(index='Platform', columns='month_str', values='kpi_value')
                     st.dataframe(pivot_view.reindex(columns=order_helper['month_str'].tolist()), use_container_width=True)
+
+        elif menu_choice == "KPI Trends":
+            st.title("📈 KPI Performance Trends")
+            
+            # Get the last two months for comparison
+            valid_data = df.dropna(subset=['kpi_value']).sort_values('month')
+            unique_months = valid_data['month'].unique()
+            
+            if len(unique_months) < 2:
+                st.warning("Not enough data for trend analysis")
+                return
+            
+            latest_month = unique_months[-1]
+            prev_month = unique_months[-2]
+            
+            # Get data for latest and previous month
+            latest_data = valid_data[valid_data['month'] == latest_month].groupby(['KPI', 'Platform']).last().reset_index()
+            prev_data = valid_data[valid_data['month'] == prev_month].groupby(['KPI', 'Platform']).last().reset_index()
+            prev_data = prev_data[['KPI', 'Platform', 'kpi_value']].rename(columns={'kpi_value': 'prev_value'})
+            
+            # Merge to compare
+            comparison = latest_data.merge(prev_data, on=['KPI', 'Platform'], how='left')
+            
+            # Determine improvement
+            def is_improved(row):
+                if pd.isna(row['prev_value']):
+                    return None
+                val = row['kpi_value']
+                prev_val = row['prev_value']
+                tgt = row['Target_num']
+                thr = row['Threshold_num']
+                
+                if tgt > thr:  # Higher is better
+                    return val > prev_val
+                else:  # Lower is better
+                    return val < prev_val
+            
+            comparison['Improved'] = comparison.apply(is_improved, axis=1)
+            
+            # Separate improved and deteriorated
+            improved_rows = []
+            deteriorated_rows = []
+            
+            for _, row in comparison.iterrows():
+                if pd.isna(row['prev_value']):
+                    continue
+                
+                unit = row['Unit']
+                prev_val = row['prev_value']
+                curr_val = row['kpi_value']
+                change = curr_val - prev_val
+                
+                # Skip rows with no change
+                if change == 0:
+                    continue
+                
+                row_dict = {
+                    "KPI Name": row['KPI'],
+                    "Platform": row['Platform'],
+                    f"Previous ({prev_month.strftime('%b %y')})": f"{prev_val:.2f} {unit}",
+                    f"Latest ({latest_month.strftime('%b %y')})": f"{curr_val:.2f} {unit}",
+                    "Change": f"{change:+.2f} {unit}"
+                }
+                
+                if row['Improved']:
+                    improved_rows.append(row_dict)
+                else:
+                    deteriorated_rows.append(row_dict)
+            
+            # --- RENDER TABLES ---
+            st.markdown('<div class="improve-header">✅ Improved KPIs</div>', unsafe_allow_html=True)
+            if improved_rows:
+                st.table(pd.DataFrame(improved_rows))
+            else:
+                st.info("No improvements this period")
+
+            st.markdown('<div class="critical-header">📉 Deteriorated KPIs</div>', unsafe_allow_html=True)
+            if deteriorated_rows:
+                st.table(pd.DataFrame(deteriorated_rows))
+            else:
+                st.success("No deterioration this period!")
 
 if __name__ == "__main__":
     main()
