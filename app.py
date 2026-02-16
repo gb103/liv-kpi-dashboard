@@ -16,6 +16,22 @@ st.markdown("""
     [data-testid="stSidebar"] label, [data-testid="stSidebar"] p,
     [data-testid="stSidebar"] .st-ae, [data-testid="stSidebar"] .stMarkdown { 
         color: white !important; 
+        background-color: transparent !important;
+    }
+    
+    /* Selectbox styling for visibility */
+    [data-testid="stSidebar"] select,
+    [data-testid="stSidebar"] [data-baseweb="select"],
+    [data-testid="stSidebar"] [role="combobox"] {
+        color: #000000 !important;
+        background-color: #ffffff !important;
+    }
+    [data-testid="stSidebar"] [data-baseweb="select"] * {
+        color: #000000 !important;
+    }
+    [data-testid="stSidebar"] .stSelectbox > div > div {
+        color: #000000 !important;
+        background-color: #ffffff !important;
     }
 
     /* Header Metrics Card Styling */
@@ -107,8 +123,16 @@ def main():
         if menu_choice == "Summary":
             st.title("📊 Dashboard Health Summary")
             
+            # Platform filter
+            all_platforms = sorted([p for p in df['Platform'].dropna().unique() if str(p).strip()])
+            selected_platform = st.sidebar.selectbox("🎯 Filter by Platform", ["All"] + all_platforms, index=0)
+            
             # Find latest month data for each KPI/Platform
             latest_data = df.dropna(subset=['kpi_value']).sort_values('month').groupby(['KPI', 'Platform']).last().reset_index()
+            
+            # Apply platform filter
+            if selected_platform != "All":
+                latest_data = latest_data[latest_data['Platform'] == selected_platform]
             
             critical_rows = []
             improve_rows = []
@@ -190,8 +214,17 @@ def main():
         elif menu_choice == "KPI Trends":
             st.title("📈 KPI Performance Trends")
             
+            # Platform filter
+            all_platforms = sorted([p for p in df['Platform'].dropna().unique() if str(p).strip()])
+            selected_platform = st.sidebar.selectbox("🎯 Filter by Platform", ["All"] + all_platforms, index=0)
+            
             # Get the last two months for comparison
             valid_data = df.dropna(subset=['kpi_value']).sort_values('month')
+            
+            # Apply platform filter
+            if selected_platform != "All":
+                valid_data = valid_data[valid_data['Platform'] == selected_platform]
+            
             unique_months = valid_data['month'].unique()
             
             if len(unique_months) < 2:
