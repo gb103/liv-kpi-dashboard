@@ -1,137 +1,138 @@
-KPI,Unit,Platform,Target,Threshold,Owner,Source,"Dec, 2024","Jan, 2025","Feb, 2025","Mar, 2025","Apr, 2025","May, 2025","Jun, 2025","Jul, 2025","Aug, 2025","Sep, 2025","Oct, 2025","Nov, 2025","Dec, 2025",
-Crash Free Rate (month wise data),%,Android,99.75,99.5,Trushal,Firebase,99.47,99.43,99.25,99.46,99.55,99.5,99.44,99.23,99.29,98.96,99.63,99.55,99.51,Usabilla + Cricket scorecard crash impacting it. some fixes are part of Sp124 build. 
-Crash Free Rate (month wise data),%,Android TV,99.75,99.5,Ashok,Firebase,99.65,99.73,99.7,99.43,99.55,99.8,99.8,99.88,99.89,99.65,99.95,99.95,99.96,
-Crash Free Rate (month wise data),%,iOS,99.75,99.5,Rahul,Firebase,99.35,99.62,99.67,99.78,99.84,99.87,99.86,99.75,99.59,97.45,99.49,98.37,98.34,
-Crash Free Rate (month wise data),%,Apple TV,99.75,99.5,Senthil,Firebase,98.6,98.76,99.18,99.23,99.29,99.36,99.35,98.85,98.93,99.02,98.94,99.07,98.99,
-ANR,%,Android,0.5,1,Trushal,Play store,0.4,0.38,0.32,0.3,0.28,0.29,0.33,0.36,0.58,0.77,0.38,0.32,0.33,
-ANR,%,Android TV,0.5,1,Ashok,Play store,1.39,,0.82,1.06,0.92,0.82,0.85,0.91,1.2,1.37,1.11,1.14,0.97,
-Slow rendering,%,Android,2,2,Trushal,Play store,6.63,5.1,4.91,5.84,4.68,4.23,2.79,2.44,1.88,4.04,3.99,2.42,2.62,
-Slow rendering,%,Android TV,2,2,Ashok,Play store,0.55,0.55,1.12,0.72,1.05,1.4,1.49,2.78,3.51,11.47,6.5,6.53,6.36,
-Frozen Frames,%,Android,15,20,Trushal,Play store,23.46,19.63,20.2,24.6,24.26,23.04,19.12,13.89,15.48,23.6,18.32,16.17,17.09,For Latest app it is 13.39%
-Frozen Frames,%,Android TV,45,45,Ashok,Play store,70.9,70.92,69.39,72.48,66.71,60%,57.28,66.42,75.59,72.72,68.68,65.37,66.71,
-Cold app startup,%,Android,2,5,Trushal,Play store,4.71,2.21,3,2.87,2.7,2.75,3.57,3.18,3.54,5.62,3.2,3.35,3.27,Peer median : 4.73%
-Cold app startup,%,Android TV,7,7,Ashok,Play store,,14.4,11.5,13.02,11.32,10.8,12.4,13.72,16.67,20.21,14.47,15.01,15.07,
-Scroll Hitch,ms/sec,iOS,3,5,Rahul,App store,4.5,4.7,4.6,4.5,4.8,4.8,5.3,12.7,20.2,9.9,11.9,10.1,10.1,
-Hang rate,ms/sec,iOS,15,10,Rahul,App store,15.8,12.3,18.9,10.2,15.2,15.5,14,53.6,58. 0,27.7,29.3,23.8,23.8,
-launch time,ms,iOS,2000,2500,Rahul,App store,2692,2555,2921,2783,2455,2414,2685,2499,2971,2271,2338,2167,2167,
-App size,MB,Android,30,30,Trushal,Play store,35.7,35.7,35.7,35.7,36,36,38.8,38.8,44.1,46.4,46.4,46.4,46.4,
-App size,MB,Android TV,30,30,Ashok,Play store,35.7,35.7,35.7,35.7,36,36,36,38.8,44.1,46.4,44.8,46.4,46.4,
-App size,MB,Apple TV,200,230,Senthil,App store,329,329,248.5,248.5,248.5,234.9,234.9,258.5,259.2,259.2,258.8,258.8,258.8,
-App open to landing screen (session_start),%,Android,85,80,Trushal,Looker,,88.1,86.86,86.25,84.73,84.18,85.72,86.56,87.27,88.89,80,83.54,83.15,Internet /offline event issues Fixed in Sp122
-App open to landing screen (session_start),%,Android TV,85,80,Ashok,Looker,,85.5,85.42,87.3,87.33,86.54,87.28,88.63,87.12,91.15,88.04,88.36,88.26,
-App size,MB,iOS,200,230,Rahul,App store,357,329,227.7,227,227,227,214,259,259,259,258.2,258.2,258.2,
-App open to landing screen (session_start),%,iOS,85,80,Rahul,Looker,,94.5,94.22,94.05,92.97,92.72,92.94,93.1,95.02,96.39,94.62,95.54,95.44,
-App open to landing screen (session_start),%,Apple TV,85,80,Senthil,Looker,,98.69,98.79,98.67,98.43,97.83,97.99,97.9,97.79,98.76,97.99,97.9,98.09,
-App open to landing screen (app_launch),%,Android,98,90,Trushal,Looker,,94,93.4,93.12,92.08,91.32,"91.97
-",92.51,92.65,92.53,87.14,90.07,90.16,"Internet /offline event issues Fixed in Sp122-- Build is yet to go live to 100% users
-https://sony-liv.atlassian.net/browse/SLIV-289703"
-App open to landing screen (app_launch),%,Android TV,98,90,Ashok,Looker,,93,"91.98
-",92.31,90.58,89.87,90.64,91.66,89.82,93.34,89.75,89.93,89.73,
-App open to landing screen (app_launch),%,iOS,98,90,Rahul,Looker,,97.1,98.36,98.14,96.41,96.53,96.64,96.49,96.28,96.82,95.6,96.45,96.41,
-App open to landing screen (app_launch),%,Apple TV,98,90,Senthil,Looker,,95.59,95.14,95.1,92.93,92.32,91.98%,92.62%,93.42%,93.22%,91.78,91.35,92.08,
-App Launch time till landing P50,second,Android,2.5,3,Trushal,Looker,,3.68,3.79,3.76,3.76,2.77,2.83,2.83,3.15,,2,2,2,Filled basis on Mixpanel : P55. (P50 not giving accurate results)
-App Launch time till landing P50,second,Android TV,2.5,5,Ashok,Looker,,5.9,5.18,4.99,5.48,5.47,5.41,5.47,6.18,6.54,19.94,4,4,
+﻿KPI,Unit,Platform,Target,Threshold,Owner,Source,"Dec, 2024","Jan, 2025","Feb, 2025","Mar, 2025","Apr, 2025","May, 2025","Jun, 2025","Jul, 2025","Aug, 2025","Sep, 2025","Oct, 2025","Nov, 2025","Dec, 2025","Jan, 2026"
+Crash Free Rate (month wise data),%,Android,99.75,99.5,Trushal,Firebase,99.47,99.43,99.25,99.46,99.55,99.5,99.44,99.23,99.29,98.96,99.63,99.55,99.51,99.71
+Crash Free Rate (month wise data),%,Android TV,99.75,99.5,Ashok,Firebase,99.65,99.73,99.7,99.43,99.55,99.8,99.8,99.88,99.89,99.65,99.95,99.95,99.96,99.88
+Crash Free Rate (month wise data),%,iOS,99.75,99.5,Rahul,Firebase,99.35,99.62,99.67,99.78,99.84,99.87,99.86,99.75,99.59,97.45,99.49,98.37,98.34,98.09
+Crash Free Rate (month wise data),%,Apple TV,99.75,99.5,Senthil,Firebase,98.6,98.76,99.18,99.23,99.29,99.36,99.35,98.85,98.93,99.02,98.94,99.07,98.99,97.81
+ANR,%,Android,0.5,1,Trushal,Play store,0.4,0.38,0.32,0.3,0.28,0.29,0.33,0.36,0.58,0.77,0.38,0.32,0.33,0.33
+ANR,%,Android TV,0.5,1,Ashok,Play store,1.39,,0.82,1.06,0.92,0.82,0.85,0.91,1.2,1.37,1.11,1.14,0.97,1.41
+Slow rendering,%,Android,2,2,Trushal,Play store,6.63,5.1,4.91,5.84,4.68,4.23,2.79,2.44,1.88,4.04,3.99,2.42,2.62,3.18
+Slow rendering,%,Android TV,2,2,Ashok,Play store,0.55,0.55,1.12,0.72,1.05,1.4,1.49,2.78,3.51,11.47,6.5,6.53,6.36,6.18
+Frozen Frames,%,Android,15,20,Trushal,Play store,23.46,19.63,20.2,24.6,24.26,23.04,19.12,13.89,15.48,23.6,18.32,16.17,17.09,17.26
+Frozen Frames,%,Android TV,45,45,Ashok,Play store,70.9,70.92,69.39,72.48,66.71,60%,57.28,66.42,75.59,72.72,68.68,65.37,66.71,70.85
+Cold app startup,%,Android,2,5,Trushal,Play store,4.71,2.21,3,2.87,2.7,2.75,3.57,3.18,3.54,5.62,3.2,3.35,3.27,3.78
+Cold app startup,%,Android TV,7,7,Ashok,Play store,,14.4,11.5,13.02,11.32,10.8,12.4,13.72,16.67,20.21,14.47,15.01,15.07,17.69%
+Scroll Hitch,ms/sec,iOS,3,5,Rahul,App store,4.5,4.7,4.6,4.5,4.8,4.8,5.3,12.7,20.2,9.9,11.9,10.1,10.1,9.6
+,,,,,,,,,,,,,,,,,,,,
+Hang rate,ms/sec,iOS,15,10,Rahul,App store,15.8,12.3,18.9,10.2,15.2,15.5,14,53.6,58. 0,27.7,29.3,23.8,23.8,6.3
+launch time,ms,iOS,2000,2500,Rahul,App store,2692,2555,2921,2783,2455,2414,2685,2499,2971,2271,2338,2167,2167,2470
+App size,MB,Android,30,30,Trushal,Play store,35.7,35.7,35.7,35.7,36,36,38.8,38.8,44.1,46.4,46.4,46.4,46.4,45.7
+App size,MB,Android TV,30,30,Ashok,Play store,35.7,35.7,35.7,35.7,36,36,36,38.8,44.1,46.4,44.8,46.4,46.4,44.3
+App size,MB,Apple TV,200,230,Senthil,App store,329,329,248.5,248.5,248.5,234.9,234.9,258.5,259.2,259.2,258.8,258.8,258.8,253.4
+App open to landing screen (session_start),%,Android,85,80,Trushal,Looker,,88.1,86.86,86.25,84.73,84.18,85.72,86.56,87.27,88.89,80,83.54,83.15,80.34
+App open to landing screen (session_start),%,Android TV,85,80,Ashok,Looker,,85.5,85.42,87.3,87.33,86.54,87.28,88.63,87.12,91.15,88.04,88.36,88.26,86.32
+App size,MB,iOS,200,230,Rahul,App store,357,329,227.7,227,227,227,214,259,259,259,258.2,258.2,258.2,253.2
+App open to landing screen (session_start),%,iOS,85,80,Rahul,Looker,,94.5,94.22,94.05,92.97,92.72,92.94,93.1,95.02,96.39,94.62,95.54,95.44,96.02
+App open to landing screen (session_start),%,Apple TV,85,80,Senthil,Looker,,98.69,98.79,98.67,98.43,97.83,97.99,97.9,97.79,98.76,97.99,97.9,98.09,98.95
+App open to landing screen (app_launch),%,Android,98,90,Trushal,Looker,,94,93.4,93.12,92.08,91.32,91.97,92.51,92.65,92.53,87.14,90.07,90.16,88.29
+App open to landing screen (app_launch),%,Android TV,98,90,Ashok,Looker,,93,91.98,92.31,90.58,89.87,90.64,91.66,89.82,93.34,89.75,89.93,89.73,89.12
+App open to landing screen (app_launch),%,iOS,98,90,Rahul,Looker,,97.1,98.36,98.14,96.41,96.53,96.64,96.49,96.28,96.82,95.6,96.45,96.41,96.69
+App open to landing screen (app_launch),%,Apple TV,98,90,Senthil,Looker,,95.59,95.14,95.1,92.93,92.32,91.98%,92.62%,93.42%,93.22%,91.78,91.35,92.08,93.54
+App Launch time till landing P50,second,Android,2.5,3,Trushal,Looker,,3.68,3.79,3.76,3.76,2.77,2.83,2.83,3.15,,2,2,2,2
+App Launch time till landing P50,second,Android TV,2.5,5,Ashok,Looker,,5.9,5.18,4.99,5.48,5.47,5.41,5.47,6.18,6.54,19.94,4,4,4
 App Launch time till landing P50,second,Apple TV,2.5,5,Senthil,Looker,,7.7,7.75,6.13,4.95,4.93,4.93,4.93,4.93,5.01,5.01,5,4.92,
-App Launch time till landing P95,second,Android,10,10,Trushal,Looker,,15.2,16.3,15.64,15.44,13.89,14.83,15.79,18.78,,12,12,12,Filled basis on Mixpanel : P95
-App Launch time till landing P95,second,Android TV,10,10,Ashok,Looker,,25.7,21.23,18.17,21.01,23.67,22.68,24.17,25.43,33.51,55.55,13,13,Need to replace to splash
+App Launch time till landing P95,second,Android,10,10,Trushal,Looker,,15.2,16.3,15.64,15.44,13.89,14.83,15.79,18.78,,12,12,12,12
+App Launch time till landing P95,second,Android TV,10,10,Ashok,Looker,,25.7,21.23,18.17,21.01,23.67,22.68,24.17,25.43,33.51,55.55,13,13,13
 App Launch time till landing P50,second,iOS,2.5,3,Rahul,Looker,,2.1,2.14,2.15,3.41,3.38,3.4,3.48,4.77,4.86,5.11,4.43,4.33,
-App Launch time till landing P95,second,iOS,10,10,Rahul,Looker,,4.2,4.36,4.4,4.71,4.28,7.9,10.33,10.53,10.51,48.07,47.53,50.05,
-App Launch time till landing P95,second,Apple TV,10,10,Senthil,Looker,,53.5,37.39,22.7,13.47,8.87,8.35,7.8,7.17,8.92,8.06,7.95,9.5,
-VST,second,Android,1,3,Nikky,Godavari,2.59,1.8,1.49,1.29,1.19,1.48,1.84,1.69,1.59,1.79,1.78,1.79,,
-VSFT,%,Android,0.1,0.3,Nikky,Godavari,0.33,0.32,0.29,0.22,0.17,0.22,0.41,0.4,0.38,1.89,0.79,0.8,,
-VPFT,%,Android,0.1,0.3,Nikky,Godavari,0.53,0.62,0.44,0.41,0.3,0.42,0.76,0.63,0.7,2.53,0.61,0.63,,
-EBVS - Excl,%,Android,5,5,Nikky,Godavari,11.86,11.5,11.52,12.12,10.49,10.72,11.6,11.23,8.25,8.46,11.72,11.1,,
-EBVS,%,Android,10,10,Nikky,Godavari,20.64,21.56,21.6,20.52,12.7,14.44,19.97,13.25,12.07,11.8,18.72,15.2,,
-Rebuffering,%,Android,0.5,2,Nikky,Godavari,0.93,0.88,0.86,0.99,1.14,1.23,1.25,1.29,1.43,1.75,1.14,1.17,,
-Play,%,Android,95,85,Nikky,Godavari,83.31,82.16,75.09,77.09,83.03,81.49,73.86,87.8,88.89,89.34,82.43,85.84,,
-VST,second,Android TV,1,3,Nikky,Godavari,1.59,1.45,1.5,1.54,1.42,1.52,1.93,2.44,2.42,2.39,2.27,2.28,,
-VSFT,%,Android TV,0.1,0.3,Nikky,Godavari,0.03,0.06,0.1,0.07,0.03,0.03,0.07,0.07,0.07,0.26,0.13,0.14,,
-VPFT,%,Android TV,0.1,0.3,Nikky,Godavari,0.2,0.22,0.22,0.22,0.22,0.2,0.41,0.38,0.4,0.65,0.39,0.38,,
-EBVS - Excl,%,Android TV,5,5,Nikky,Godavari,3.73,4.91,4.46,4.73,3.33,4.07,6.51,7.37,6.65,7.63,5.79,5.59,,
-EBVS,%,Android TV,10,10,Nikky,Godavari,5.03,7.16,7.59,7.48,4.23,4.99,9.27,9.41,9.82,11.59,11.46,8.89,,
-Rebuffering ,%,Android TV,0.5,2,Nikky,Godavari,0.58,0.56,0.53,0.48,0.33,0.33,0.43,0.41,0.43,0.42,0.33,0.3,,
-Play,%,Android TV,95,85,Nikky,Godavari,95.92,93.97,92.25,92.31,95.4,94.69,90,90.81,90.43,89.18,88.65,91.06,,
-VST,second,iOS,1,3,Priye,Godavari,2.17,2.08,2.19,2.31,2.14,2.3,2.12,1.99,2.11,2.43,2.44,2.4,2.33,
-VSFT,%,iOS,0.1,0.3,Priye,Godavari,0.04,0.05,0.04,0.06,0.08,0.11,0.01,0.03,0.06,0.02,0.07,0.11,0.09,
-VPFT,%,iOS,0.1,0.3,Priye,Godavari,0.02,0.03,0.01,0.02,0.03,0.04,0.04,0.14,0.42,0.07,0.51,1.39,1.21,
-EBVS - Excl,%,iOS,5,5,Priye,Godavari,11.62,12.48,13.02,12.63,8.47,9.95,10.68,8.69,8.32,7.74,8.84,8.54,8.23,
-EBVS,%,iOS,10,10,Priye,Godavari,13.03,14.14,14.78,14.56,9,10.7,11.71,8.85,8.56,8.29,9.38,8.96,8.67,
-Rebuffering,%,iOS,0.5,2,Priye,Godavari,0.66,0.59,0.73,0.73,0.77,0.89,0.93,0.89,0.93,1.78,0.83,0.59,0.63,
-Play,%,iOS,95,85,Priye,Godavari,88.17,87.36,86.81,85.86,93.39,91.62,88.72,94.02,91.33,87.42,91.01,90.44,90.9,
-VST,second,Apple TV,1,3,Priye,Godavari,1.82,1.8,1.88,2.1,1.61,1.66,1.63,1.6,1.62,1.71,1.63,1.67,1.69,
-VSFT,%,Apple TV,0.1,0.3,Priye,Godavari,0.01,0,0,0,0,0,0.01,0.03,0.11,0.18,0.08,0.1,0.14,
-VPFT,%,Apple TV,0.1,0.3,Priye,Godavari,0.06,0.01,0,0,0,0,0.01,0.11,0.18,2.45,0.43,0.5,0.49,
-EBVS - Excl,%,Apple TV,5,5,Priye,Godavari,8.07,8.01,8.18,7.05,5.51,5.93,6.29,6.63,7.22,6.44,6.9,6.18,7.49,
-EBVS,%,Apple TV,10,10,Priye,Godavari,9.56,10.54,10.36,8.12,5.65,6.1,6.52,6.72,7.39,6.87,7.42,6.42,7.52,
-Rebuffering,%,Apple TV,0.5,2,Priye,Godavari,0.2,0.25,0.92,1.08,1.22,1.3,1.27,1.23,0.93,1.41,1.29,1.18,1.25,
-Play,%,Apple TV,95,85,Priye,Godavari,91.36,90.34,90.03,92.05,94.7,95.46,93.91,94.72,94.35,94.02,92.90%,93.7,92.46,
-Crash Free Rate (month wise data),%,Jio TV,99.75,99.5,Ashok,Firebase,,,,99.2,99.7,99.74,99.53,99.98,98.59,99.75,99.99,99.93,99.94,
-ANR,%,Jio TV,NA,NA,Ashok,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,
-Slow rendering,%,Jio TV,NA,NA,Ashok,Play store,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,
-Frozen Frames,%,Jio TV,NA,NA,Ashok,Play store,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,
-"app startup time
-(in firebase we get app start time not cold start %)",second,Jio TV,1,2,Ashok,Firebase,,,,1,1.27,1.24,1.2,,1.33,1.41,1.31,1.21,1.32,
-App size,MB,Jio TV,NA,NA,Ashok,Play store,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,
-App open to landing screen (session_start),%,Jio TV,85,80,Ashok,Looker,,84.28,84.84,86.88,94.55,94.94,95.13,96.34,96.63,97.49,97.25%,97.45%,97.58%,
-App open to landing screen (app_launch),%,Jio TV,98,90,Ashok,Looker,,90.05,90.24,91.78,96.31,95.66,95.78,96.62,96.69,97.68,97.47%,97.58%,97.59%,
-App Launch time till landing P50,second,Jio TV,2.5,5,Ashok,Looker,,4.53,4.36,4.29,3.26,3.19,3.36,3.25,4.09,5.74,10.25,4,4,
-App Launch time till landing P95,second,Jio TV,10,10,Ashok,Looker,,16.02,15.83,14.46,7.11,6.61,7.35,7.6,8.51,12.14,23.12,8,9,
-VST,second,Jio TV,1,3,Nikky,Godavari,1.38,1.39,1.45,1.38,1.14,1.25,1.3,1.22,1.66,2.42,1.88,1.8,,
-VSFT,%,Jio TV,0.1,0.3,Nikky,Godavari,0,0.04,0.05,0.04,0.01,0,0.01,0.01,0.01,0.09,0.05,0.05,,
-VPFT,%,Jio TV,0.1,0.3,Nikky,Godavari,0.12,0.13,0.13,0.13,0.15,0.12,0.15,0.13,0.15,0.77,0.22,0.19,,
-EBVS - Excl,%,Jio TV,5,5,Nikky,Godavari,3.45,6.36,4.93,4.6,2.61,3.01,3.3,3.28,3.81,4.57,4.06,3.49,,
-EBVS,%,Jio TV,10,10,Nikky,Godavari,3.93,7.12,6.33,5.63,2.65,3.19,3.51,3.32,3.97,5.06,5.09,3.75,,
-Rebuffering,%,Jio TV,0.5,2,Nikky,Godavari,0.58,0.55,0.53,0.49,0.27,0.26,0.28,0.26,0.29,0.35,0.26,0.25,,
-Play,%,Jio TV,95,85,Nikky,Godavari,96.4,93.52,93.96,94.41,97.22,96.78,96.45,96.73,96.08,94.71,94.96,96.26,,
-Crash Free Rate (month wise data),%,AFS,99.9,99.5,Ashok,Firebase,99.2,99.2,99.2,99.2,99.45,99.66,99.5,99.81,99.79,99.02,99.81,99.47,99.41,
-ANR,%,AFS,NA,NA,Ashok,Play store,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,
-Slow rendering,%,AFS,NA,NA,Ashok,Play store,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,
-Frozen Frames,%,AFS,NA,NA,Ashok,Play store,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,
-"app startup time
-(in firebase we get app start time not cold start %)",second,AFS,2,3,Ashok,Play store,,,,4.86,4.71,4.8,4.31,,4.99,4.8,4.43,4.1,4.35,
-App size,MB,AFS,NA,NA,Ashok,Play store,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,
-App open to landing screen (session_start),%,AFS,90,85,Ashok,Looker,,86.71,86.55,86.51,86.27,85.19,83.94,89.3,93.31,96.05,93.68,92.49,94.31,
-App open to landing screen (app_launch),%,AFS,98,90,Ashok,Looker,,95.55,95.5,95.55,95.33,94.51,93.89,95.59,96.52,98.25,96.98,96.39,97.34,
-App Launch time till landing P50,second,AFS,2,5,Ashok,Looker,,7.52,6.79,6.57,6.56,7,6.43,6.81,7.29,9.65,18.47,9,10,
-App Launch time till landing P95,second,AFS,10,10,Ashok,Looker,,27.17,26.49,25.49,24.22,24.13,24.18,24.91,23.69,34.47,51.02,58,156,
-VST,second,AFS,1,3,Nikky,Godavari,1.35,1.08,1.05,1.19,1.41,1.38,1.42,1.9,2.46,2.3,2.32,2.27,,
-VSFT,%,AFS,0.1,0.3,Nikky,Godavari,0.03,0.1,0.13,0.15,0.13,0.13,0.13,0.1,0.05,0.62,0.1,0.11,,
-VPFT,%,AFS,0.1,0.3,Nikky,Godavari,0.2,0.21,0.22,0.28,0.2,0.21,0.2,0.21,0.22,0.54,0.22,0.23,,
-EBVS - Excl,%,AFS,5,5,Nikky,Godavari,3.14,2.65,2.73,2.93,2.66,3.06,3.42,5.17,5.83,6.8,4.4,4.12,,
-EBVS,%,AFS,10,10,Nikky,Godavari,5.56,7.62,8.47,8.21,4.46,4.46,5.14,6.78,8.55,10.37,9.17,6.55,,
-Rebuffering,%,AFS,0.5,2,Nikky,Godavari,0.52,0.51,0.49,0.5,0.48,0.51,0.52,0.46,0.37,0.37,0.41,0.31,,
-Play,%,AFS,95,85,Nikky,Godavari,93.96,91.67,90.67,91.07,94.78,94.81,94.03,93.18,91.56,89.66,90.82,93.38,,
-RAI per million,RAI per million,Android,100,200,Nikky,SRE,388.37,362.64,450.5,487.7,403,418.5,521.32,257,204,694,51.56,60.38,,
-RAI per million,RAI per million,Android TV,100,200,Nikky,SRE,247.7,265,302.15,358.25,293.7,290,303.53,390,314,2820,61.42,76.41,,
-RAI per million,RAI per million,Jio TV,100,200,Nikky,SRE,103.9,105.68,118.3,168.6,172.2,87,129.36,138,117,3380,69.08,77.57,,
-RAI per million,RAI per million,AFS,100,200,Nikky,SRE,220.52,224.62,197.2,346.8,205.3,181.4,190.77,250,257,4130,8.4,12.64,,
-RAI per million,RAI per million,iPHONE,100,200,Priye,SRE,,,,,78.3,95.53,232.66,154.58,124.19,1710,157.17,,,
-RAI per million,RAI per million,Apple TV,100,200,Priye,SRE,,,,,266.1,412.21,405.45,373.42,423.81,1990,341.83,,,
-RAI per million - LIVE,RAI per million,Android,100,200,Nikky,SRE,,320.58,406,1147.91,1582.07,1053.8,307.91,402,411,529,82.4,94.28,,"Video url response print, mediaCodecDecoderInit - fix (release player), surfaceView"
-RAI per million - LIVE,RAI per million,Android TV,100,200,Nikky,SRE,,185.74,199.59,341.41,445.33,679.7,135.57,649,164,294,81.7,168.09,,"Increased due to SL1 errors on 5,6,25,16 Nov(SL1 caused VSPB, Rebuffering, VBP RAIs). Rebuffering due to stalled manifest(Behind live window)"
-RAI per million - LIVE,RAI per million,Jio TV,100,200,Nikky,SRE,,,,,, - ,295.31,259,401,950,174.9,220.42,,"Increased due to SL1 errors on 5,6,25,16 Nov(SL1 caused VSPB, Rebuffering, VBP RAIs). Rebuffering due to stalled manifest(Behind live window)"
-RAI per million - LIVE,RAI per million,AFS,100,200,Nikky,SRE,,,,,, - ,6.48,7.6,36,119,15.5,33.7,,
-RAI per million - LIVE,RAI per million,iPHONE,100,200,Priye,SRE,,,,,,182,,,,2530,,,,
+App Launch time till landing P95,second,iOS,10,10,Rahul,Looker,,4.2,4.36,4.4,4.71,4.28,7.9,10.33,10.53,10.51,48.07,6,5,5
+App Launch time till landing P95,second,Apple TV,10,10,Senthil,Looker,,53.5,37.39,22.7,13.47,8.87,8.35,7.8,7.17,8.92,8.06,6,7,5
+VST,second,Android,1,3,Nikky,Godavari,2.59,1.8,1.49,1.29,1.19,1.48,1.84,1.69,1.59,1.79,1.78,1.79,,0.82
+VSFT,%,Android,0.1,0.3,Nikky,Godavari,0.33,0.32,0.29,0.22,0.17,0.22,0.41,0.4,0.38,1.89,0.79,0.8,,0.93
+VPFT,%,Android,0.1,0.3,Nikky,Godavari,0.53,0.62,0.44,0.41,0.3,0.42,0.76,0.63,0.7,2.53,0.61,0.63,,0.59
+EBVS - Excl,%,Android,5,5,Nikky,Godavari,11.86,11.5,11.52,12.12,10.49,10.72,11.6,11.23,8.25,8.46,11.72,11.1,,6.08
+EBVS,%,Android,10,10,Nikky,Godavari,20.64,21.56,21.6,20.52,12.7,14.44,19.97,13.25,12.07,11.8,18.72,15.2,,20.66
+Rebuffering,%,Android,0.5,2,Nikky,Godavari,0.93,0.88,0.86,0.99,1.14,1.23,1.25,1.29,1.43,1.75,1.14,1.17,,1.02
+Play,%,Android,95,85,Nikky,Godavari,83.31,82.16,75.09,77.09,83.03,81.49,73.86,87.8,88.89,89.34,82.43,85.84,,81.25
+VST,second,Android TV,1,3,Nikky,Godavari,1.59,1.45,1.5,1.54,1.42,1.52,1.93,2.44,2.42,2.39,2.27,2.28,,2.04
+VSFT,%,Android TV,0.1,0.3,Nikky,Godavari,0.03,0.06,0.1,0.07,0.03,0.03,0.07,0.07,0.07,0.26,0.13,0.14,,0.4
+VPFT,%,Android TV,0.1,0.3,Nikky,Godavari,0.2,0.22,0.22,0.22,0.22,0.2,0.41,0.38,0.4,0.65,0.39,0.38,,0.28
+EBVS - Excl,%,Android TV,5,5,Nikky,Godavari,3.73,4.91,4.46,4.73,3.33,4.07,6.51,7.37,6.65,7.63,5.79,5.59,,5.27
+EBVS,%,Android TV,10,10,Nikky,Godavari,5.03,7.16,7.59,7.48,4.23,4.99,9.27,9.41,9.82,11.59,11.46,8.89,,12.92
+Rebuffering ,%,Android TV,0.5,2,Nikky,Godavari,0.58,0.56,0.53,0.48,0.33,0.33,0.43,0.41,0.43,0.42,0.33,0.3,,0.25
+Play,%,Android TV,95,85,Nikky,Godavari,95.92,93.97,92.25,92.31,95.4,94.69,90,90.81,90.43,89.18,88.65,91.06,,87.4
+VST,second,iOS,1,3,Priye,Godavari,2.17,2.08,2.19,2.31,2.14,2.3,2.12,1.99,2.11,2.43,2.44,2.4,2.33,2.19
+VSFT,%,iOS,0.1,0.3,Priye,Godavari,0.04,0.05,0.04,0.06,0.08,0.11,0.01,0.03,0.06,0.02,0.07,0.11,0.09,0.12
+VPFT,%,iOS,0.1,0.3,Priye,Godavari,0.02,0.03,0.01,0.02,0.03,0.04,0.04,0.14,0.42,0.07,0.51,1.39,1.21,0.96
+EBVS - Excl,%,iOS,5,5,Priye,Godavari,11.62,12.48,13.02,12.63,8.47,9.95,10.68,8.69,8.32,7.74,8.84,8.54,8.23,7.74
+EBVS,%,iOS,10,10,Priye,Godavari,13.03,14.14,14.78,14.56,9,10.7,11.71,8.85,8.56,8.29,9.38,8.96,8.67,8.83
+Rebuffering,%,iOS,0.5,2,Priye,Godavari,0.66,0.59,0.73,0.73,0.77,0.89,0.93,0.89,0.93,1.78,0.83,0.59,0.63,0.55
+Play,%,iOS,95,85,Priye,Godavari,88.17,87.36,86.81,85.86,93.39,91.62,88.72,94.02,91.33,87.42,91.01,90.44,90.9,91.3
+VST,second,Apple TV,1,3,Priye,Godavari,1.82,1.8,1.88,2.1,1.61,1.66,1.63,1.6,1.62,1.71,1.63,1.67,1.69,1.73
+VSFT,%,Apple TV,0.1,0.3,Priye,Godavari,0.01,0,0,0,0,0,0.01,0.03,0.11,0.18,0.08,0.1,0.14,0.21
+VPFT,%,Apple TV,0.1,0.3,Priye,Godavari,0.06,0.01,0,0,0,0,0.01,0.11,0.18,2.45,0.43,0.5,0.49,0.64
+EBVS - Excl,%,Apple TV,5,5,Priye,Godavari,8.07,8.01,8.18,7.05,5.51,5.93,6.29,6.63,7.22,6.44,6.9,6.18,7.49,6.6
+EBVS,%,Apple TV,10,10,Priye,Godavari,9.56,10.54,10.36,8.12,5.65,6.1,6.52,6.72,7.39,6.87,7.42,6.42,7.52,7.12
+Rebuffering,%,Apple TV,0.5,2,Priye,Godavari,0.2,0.25,0.92,1.08,1.22,1.3,1.27,1.23,0.93,1.41,1.29,1.18,1.25,1.06
+Play,%,Apple TV,95,85,Priye,Godavari,91.36,90.34,90.03,92.05,94.7,95.46,93.91,94.72,94.35,94.02,92.9,93.7,92.46,92.65
+Crash Free Rate (month wise data),%,Jio TV,99.75,99.5,Ashok,Firebase,,,,99.2,99.7,99.74,99.53,99.98,98.59,99.75,99.99,99.93,99.94,99.97
+ANR,%,Jio TV,NA,NA,Ashok,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Slow rendering,%,Jio TV,NA,NA,Ashok,Play store,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Frozen Frames,%,Jio TV,NA,NA,Ashok,Play store,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+app startup time,second,Jio TV,1,2,Ashok,Firebase,,,,1,1.27,1.24,1.2,,1.33,1.41,1.31,1.21,1.32,1.41
+(in firebase we get app start time not cold start %),,,,,,,,,,,,,,,,,,,,
+App size,MB,Jio TV,NA,NA,Ashok,Play store,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+App open to landing screen (session_start),%,Jio TV,85,80,Ashok,Looker,,84.28,84.84,86.88,94.55,94.94,95.13,96.34,96.63,97.49,97.25,97.45,97.58,97.17
+App open to landing screen (app_launch),%,Jio TV,98,90,Ashok,Looker,,90.05,90.24,91.78,96.31,95.66,95.78,96.62,96.69,97.68,97.47,97.58,97.59,97.03
+App Launch time till landing P50,second,Jio TV,2.5,5,Ashok,Looker,,4.53,4.36,4.29,3.26,3.19,3.36,3.25,4.09,5.74,10.25,4,4,4
+App Launch time till landing P95,second,Jio TV,10,10,Ashok,Looker,,16.02,15.83,14.46,7.11,6.61,7.35,7.6,8.51,12.14,23.12,8,9,10
+VST,second,Jio TV,1,3,Nikky,Godavari,1.38,1.39,1.45,1.38,1.14,1.25,1.3,1.22,1.66,2.42,1.88,1.8,,1.55
+VSFT,%,Jio TV,0.1,0.3,Nikky,Godavari,0,0.04,0.05,0.04,0.01,0,0.01,0.01,0.01,0.09,0.05,0.05,,0.09
+VPFT,%,Jio TV,0.1,0.3,Nikky,Godavari,0.12,0.13,0.13,0.13,0.15,0.12,0.15,0.13,0.15,0.77,0.22,0.19,,0.22
+EBVS - Excl,%,Jio TV,5,5,Nikky,Godavari,3.45,6.36,4.93,4.6,2.61,3.01,3.3,3.28,3.81,4.57,4.06,3.49,,3.42
+EBVS,%,Jio TV,10,10,Nikky,Godavari,3.93,7.12,6.33,5.63,2.65,3.19,3.51,3.32,3.97,5.06,5.09,3.75,,5.85
+Rebuffering,%,Jio TV,0.5,2,Nikky,Godavari,0.58,0.55,0.53,0.49,0.27,0.26,0.28,0.26,0.29,0.35,0.26,0.25,,0.18
+Play,%,Jio TV,95,85,Nikky,Godavari,96.4,93.52,93.96,94.41,97.22,96.78,96.45,96.73,96.08,94.71,94.96,96.26,,94.29
+Crash Free Rate (month wise data),%,AFS,99.9,99.5,Ashok,Firebase,99.2,99.2,99.2,99.2,99.45,99.66,99.5,99.81,99.79,99.02,99.81,99.47,99.41,99.87
+ANR,%,AFS,NA,NA,Ashok,Play store,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Slow rendering,%,AFS,NA,NA,Ashok,Play store,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Frozen Frames,%,AFS,NA,NA,Ashok,Play store,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+app startup time,second,AFS,2,3,Ashok,Play store,,,,4.86,4.71,4.8,4.31,,4.99,4.8,4.43,4.1,4.35,4.65
+(in firebase we get app start time not cold start %),,,,,,,,,,,,,,,,,,,,
+App size,MB,AFS,NA,NA,Ashok,Play store,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+App open to landing screen (session_start),%,AFS,90,85,Ashok,Looker,,86.71,86.55,86.51,86.27,85.19,83.94,89.3,93.31,96.05,93.68,92.49,94.31,93.09
+App open to landing screen (app_launch),%,AFS,98,90,Ashok,Looker,,95.55,95.5,95.55,95.33,94.51,93.89,95.59,96.52,98.25,96.98,96.39,97.34,96.44
+App Launch time till landing P50,second,AFS,2,5,Ashok,Looker,,7.52,6.79,6.57,6.56,7,6.43,6.81,7.29,9.65,18.47,9,10,6
+App Launch time till landing P95,second,AFS,10,10,Ashok,Looker,,27.17,26.49,25.49,24.22,24.13,24.18,24.91,23.69,34.47,51.02,58,17,17
+VST,second,AFS,1,3,Nikky,Godavari,1.35,1.08,1.05,1.19,1.41,1.38,1.42,1.9,2.46,2.3,2.32,2.27,,1.94
+VSFT,%,AFS,0.1,0.3,Nikky,Godavari,0.03,0.1,0.13,0.15,0.13,0.13,0.13,0.1,0.05,0.62,0.1,0.11,,0.56
+VPFT,%,AFS,0.1,0.3,Nikky,Godavari,0.2,0.21,0.22,0.28,0.2,0.21,0.2,0.21,0.22,0.54,0.22,0.23,,0.23
+EBVS - Excl,%,AFS,5,5,Nikky,Godavari,3.14,2.65,2.73,2.93,2.66,3.06,3.42,5.17,5.83,6.8,4.4,4.12,,3.66
+EBVS,%,AFS,10,10,Nikky,Godavari,5.56,7.62,8.47,8.21,4.46,4.46,5.14,6.78,8.55,10.37,9.17,6.55,,9.72
+Rebuffering,%,AFS,0.5,2,Nikky,Godavari,0.52,0.51,0.49,0.5,0.48,0.51,0.52,0.46,0.37,0.37,0.41,0.31,,0.23
+Play,%,AFS,95,85,Nikky,Godavari,93.96,91.67,90.67,91.07,94.78,94.81,94.03,93.18,91.56,89.66,90.82,93.38,,90.03
+RAI per million,RAI per million,Android,100,200,Nikky,SRE,388.37,362.64,450.5,487.7,403,418.5,521.32,257,204,694,51.56,60.38,,157.4
+RAI per million,RAI per million,Android TV,100,200,Nikky,SRE,247.7,265,302.15,358.25,293.7,290,303.53,390,314,2820,61.42,76.41,,446.6
+RAI per million,RAI per million,Jio TV,100,200,Nikky,SRE,103.9,105.68,118.3,168.6,172.2,87,129.36,138,117,3380,69.08,77.57,,215.8
+RAI per million,RAI per million,AFS,100,200,Nikky,SRE,220.52,224.62,197.2,346.8,205.3,181.4,190.77,250,257,4130,8.4,12.64,,288.83
+RAI per million,RAI per million,iPHONE,100,200,Priye,SRE,,,,,78.3,95.53,232.66,154.58,124.19,1710,157.17,,,180.63
+RAI per million,RAI per million,Apple TV,100,200,Priye,SRE,,,,,266.1,412.21,405.45,373.42,423.81,1990,341.83,,,517
+RAI per million - LIVE,RAI per million,Android,100,200,Nikky,SRE,,320.58,406,1147.91,1582.07,1053.8,307.91,402,411,529,82.4,94.28,,242
+RAI per million - LIVE,RAI per million,Android TV,100,200,Nikky,SRE,,185.74,199.59,341.41,445.33,679.7,135.57,649,164,294,81.7,168.09,,650
+RAI per million - LIVE,RAI per million,Jio TV,100,200,Nikky,SRE,,,,,,- ,295.31,259,401,950,174.9,220.42,,582
+RAI per million - LIVE,RAI per million,AFS,100,200,Nikky,SRE,,,,,,- ,6.48,7.6,36,119,15.5,33.7,,348
+RAI per million - LIVE,RAI per million,iPHONE,100,200,Priye,SRE,,,,,,182,,,,2530,,,,406.1
 RAI per million - LIVE,RAI per million,Apple TV,100,200,Priye,SRE,,,,,,680,,,,,,,,
-RAI per million - VOD,RAI per million,Android,100,200,Nikky,SRE,,169.66,234.94,206.99,167.72,188,62.2,64,49,117,47.3,55.3,,
-RAI per million - VOD,RAI per million,Android TV,100,200,Nikky,SRE,,150.95,174.86,212.25,197.01,133.9,33.08,50,35,44,58.6,63.2,,
-RAI per million - VOD,RAI per million,Jio TV,100,200,Nikky,SRE,,,,,, - ,27.77,44,30,44,,56.43,,
-RAI per million - VOD,RAI per million,AFS,100,200,Nikky,SRE,,,,,, - ,6.85,9.4,8,6.3,7.4,9.5,,
-RAI per million - VOD,RAI per million,iPHONE,100,200,Priye,SRE,,,,,,81,4.69,,,264,,,,
-RAI per million - VOD,RAI per million,Apple TV,100,200,Priye,SRE,,,,,,352,0.7,,,,,,,
-EBVS > 10 Sec,%,Android,3,5,Nikky,Godavari,,,,,,,,,,,,3.67,,
-EBVS > 10 Sec,%,Android TV,3,5,Nikky,Godavari,,,,,,,,,,,,2.6,,
-EBVS > 10 Sec,%,Jio TV,3,5,Nikky,Godavari,,,,,,,,,,,,0.36,,
-EBVS > 10 Sec,%,AFS,3,5,Nikky,Godavari,,,,,,,,,,,,1.54,,
-EBVS > 10 Sec,%,iPHONE,3,5,Priye,Godavari,,,,,,,,,,,,1.39,1.39,
-EBVS > 10 Sec,%,Apple TV,3,5,Priye,Godavari,,,,,,,,,,,,0.83,1.48,
-Download success,%,Android Phone,98,95,Nikky,,,,,,,,,,,,96.18,96.71,,
-Download success,%,iPhone,98,95,Priye,,,,,,,,,,,,,,,
-Download Speed,second,Android Phone,120,180,Nikky,,,,,,,,,,,,174,174,,
-Download Speed,second,iPhone,120,180,Priye,,,,,,,,,,,,,,,
-Offline playback success %,%,Android Phone,99.9,98,Nikky,Godavari,,,,,,,,,,,98.57,98.6,,
-Offline playback success %,%,iPhone,99.9,98,Priye,,,,,,,,,,,,,,,
-Payment plan page conversion,%,Android Phone,40,30,Trushal,,,,,,,,,,,,,,,
-Payment plan page conversion,%,Android TV,40,30,Ashok,,,,,,,,,,,,,,,
-Payment plan page conversion,%,iPHONE,40,30,Rahul,,,,,,,,,,,,,,,
-Payment plan page conversion,%,Apple TV,40,30,Senthil,,,,,,,,,,,,,,,
+RAI per million - VOD,RAI per million,Android,100,200,Nikky,SRE,,169.66,234.94,206.99,167.72,188,62.2,64,49,117,47.3,55.3,,145
+RAI per million - VOD,RAI per million,Android TV,100,200,Nikky,SRE,,150.95,174.86,212.25,197.01,133.9,33.08,50,35,44,58.6,63.2,,426
+RAI per million - VOD,RAI per million,Jio TV,100,200,Nikky,SRE,,,,,,- ,27.77,44,30,44,,56.43,,181
+RAI per million - VOD,RAI per million,AFS,100,200,Nikky,SRE,,,,,,- ,6.85,9.4,8,6.3,7.4,9.5,,282
+RAI per million - VOD,RAI per million,iPHONE,100,200,Priye,SRE,,,,,,81,4.69,,,264,,,,138
+RAI per million - VOD,RAI per million,Apple TV,100,200,Priye,SRE,,,,,,352,0.7,,,,,,,863
+EBVS > 10 Sec,%,Android,3,5,Nikky,Godavari,,,,,,,,,,,,3.67,,2.36
+EBVS > 10 Sec,%,Android TV,3,5,Nikky,Godavari,,,,,,,,,,,,2.6,,3.7
+EBVS > 10 Sec,%,Jio TV,3,5,Nikky,Godavari,,,,,,,,,,,,0.36,,0.5
+EBVS > 10 Sec,%,AFS,3,5,Nikky,Godavari,,,,,,,,,,,,1.54,,2.24
+EBVS > 10 Sec,%,iPHONE,3,5,Priye,Godavari,,,,,,,,,,,,1.39,1.39,1.34
+EBVS > 10 Sec,%,Apple TV,3,5,Priye,Godavari,,,,,,,,,,,,0.83,1.48,0.76
+Download success,%,Android Phone,98,95,Nikky,Mixpanel,,,,,,,,,,,96.18,96.71,,96.7
+Download success,%,iPhone,98,95,Priye,Mixpanel,,,,,,,,,,,,,,
+Download Speed,second,Android Phone,120,180,Nikky,Mixpanel,,,,,,,,,,,174,174,,3.6
+Download Speed,second,iPhone,120,180,Priye,Mixpanel,,,,,,,,,,,,,,
+Offline playback success %,%,Android Phone,99.9,98,Nikky,Godavari,,,,,,,,,,,98.57,98.6,,98.78
+Offline playback success %,%,iPhone,99.9,98,Priye,Godavari,,,,,,,,,,,,,,
+App store rating,*,Android Phone,4.7,4,Trushal,Play store,,,,,,,,,,,,,3.7,3.587
+App store rating,*,iPhone,4.8,4.2,Rahul,App store,,,,,,,,,,,,,4.2,
+App store rating,*,Android TV,4,3.5,Ashok,Play store,,,,,,,,,,,,,3.9,
+App store rating,*,Apple TV,4,3,Senthil,App store,,,,,,,,,,,,,2.5,
+,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
